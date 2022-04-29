@@ -19,7 +19,7 @@
         <label for="">Digite aqui seu peso</label><br>
         <input class="p-2 m-2" id="peso" type="text"><br>
         <button class="btn btn-light b-2" onclick="calcImc()">Clik para calcular</button>
-        <p id="resp">Resultado da analise: <span></span></p>
+        <p class="pt-2" id="resp">Resultado da analise:</p>
         <button class="btn btn-light" type="text" onclick="rload()">Clik para limpar os dados</button>
     </div>
     
@@ -30,6 +30,7 @@
         var imc=''
         var nivel=''
         var resp=''
+        var ideal=''
 
     function rload() {//função limpar tela
         location.reload();
@@ -41,6 +42,8 @@
         var alt = document.getElementById('altu').value;
         var pes = document.getElementById('peso').value;//resgate de valor do imput
         var imc=pes/(alt**2)//calculo de imc
+        ideal= (alt**2)*24.9
+        ideal=ideal.toFixed(2)
         imc=imc.toFixed(2)//uso de apenas 2 casas decimais no imc
         
     if (imc>=0 && imc<=16.9) {//seleção de nivel para uso do switch
@@ -69,35 +72,42 @@
         case 1:
             document.querySelector('p#resp').innerHTML='';
                 document.querySelector('p#resp').innerHTML+=(` Seu IMC é ${imc}, você esta muito abaixo do peso !`)
+                document.querySelector('p#resp').innerHTML+=(` O peso ideal máximo para sua altura é ${ideal} Kg`)
                 break;
         case 2:
             document.querySelector('p#resp').innerHTML='';
             document.querySelector('p#resp').innerHTML+=(`Seu IMC é ${imc}, você esta abaixo do peso !`)
+            document.querySelector('p#resp').innerHTML+=(` O peso ideal máximo para sua altura é ${ideal} Kg`)
             break;
 
         case 3:
             document.querySelector('p#resp').innerHTML='';
             document.querySelector('p#resp').innerHTML+=(`Seu IMC é ${imc}, você esta  peso normal !`)
+            document.querySelector('p#resp').innerHTML+=(` O peso ideal máximo para sua altura é ${ideal} Kg`)
             break;
     
         case 4:
             document.querySelector('p#resp').innerHTML='';
             document.querySelector('p#resp').innerHTML+=(`Seu IMC é ${imc}, você esta acima do peso !`)
+            document.querySelector('p#resp').innerHTML+=(` O peso ideal máximo para sua altura é ${ideal} Kg`)
             break;
 
         case 5:
             document.querySelector('p#resp').innerHTML='';
             document.querySelector('p#resp').innerHTML+=(`Seu IMC é ${imc}, você esta em obesidade 1 !`)
+            document.querySelector('p#resp').innerHTML+=(` O peso ideal máximo para sua altura é ${ideal} Kg`)
             break;
 
         case 6:
             document.querySelector('p#resp').innerHTML='';
             document.querySelector('p#resp').innerHTML+=(`Seu IMC é ${imc}, você esta em obesdade 2!`)
+            document.querySelector('p#resp').innerHTML+=(` O peso ideal máximo para sua altura é ${ideal} Kg`)
             break;
 
         case 7:
             document.querySelector('p#resp').innerHTML='';
             document.querySelector('p#resp').innerHTML+=(`Seu IMC é ${imc}, você esta em obesidade 3 (MÓRBIDA)!`)
+            document.querySelector('p#resp').innerHTML+=(` O peso ideal máximo para sua altura é ${ideal} Kg`)
             break;
         
             default:
