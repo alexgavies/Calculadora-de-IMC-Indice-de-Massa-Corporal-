@@ -4,7 +4,6 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="imc.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
     <title>IMC</title>
 </head>
@@ -18,26 +17,59 @@
         <input class="p-2 m-2" id="altu" type="text"><br>
         <label for="">Digite aqui seu peso</label><br>
         <input class="p-2 m-2" id="peso" type="text"><br>
-        <button class="btn btn-light b-2" onclick="calcImc()">Clik para calcular</button>
-        <p class="pt-2" id="resp">Resultado da analise:</p>
+        <button class="btn btn-light b-2" onclick="calcImc(), consoleImc()">Clik para calcular</button>
+        <p class="p-1 mt-1 bg-black rounded-2" id="resp">Resultado da analise:</p>
         <button class="btn btn-light" type="text" onclick="rload()">Clik para limpar os dados</button>
+        <p id="msg" class="pt-3"></p>
     </div>
     
     <script>
-    //variaves usadas
+        //variaves usadas
         var alt = ''
         var pes = ''
         var imc=''
         var nivel=''
         var resp=''
         var ideal=''
+        //vaiaveis array
+        var pessoas=''
+        var pesos=''
+        var alturas=''
+        var indice=''
+        var mens=''
 
-    function rload() {//função limpar tela
+        function rload() {//função limpar tela
         location.reload();
-    }
-    
-    //função imc
-    function calcImc(alt,pes) {
+        }
+
+        //função imc array
+        function consoleImc(pessoas,pesos,altras) {
+            
+            pessoas=['Maria','Jose','Antonio']
+            pesos=[60,70,80]
+            alturas=[1.6,1.7,1.8]
+            
+            for (let indice = 0; indice < pessoas.length; indice++) {
+                const element = pessoas[indice];
+            
+            var pessoa=pessoas[indice]
+            var peso=pesos[indice]
+            var altura=alturas[indice]
+            imc=peso/(altura**2);
+            console.log('Nome: '+pessoa);
+            console.log('Altura: '+altura+ " M")
+            console.log('Peso: '+peso+' Kg')
+            console.log('IMC: '+imc)
+            console.log('')
+            }
+            mens=document.getElementById('msg');
+            document.getElementById('msg').innerHTML=''
+            document.getElementById('msg').innerHTML+='Pressione F12 para conferir no console uma lista predeterminada com uso de function array e for.';
+            
+        }
+   
+        //função imc input
+        function calcImc(alt,pes) {
         
         var alt = document.getElementById('altu').value;
         var pes = document.getElementById('peso').value;//resgate de valor do imput
@@ -45,23 +77,24 @@
         ideal= (alt**2)*24.9
         ideal=ideal.toFixed(2)
         imc=imc.toFixed(2)//uso de apenas 2 casas decimais no imc
+
         
-    if (imc>=0 && imc<=16.9) {//seleção de nivel para uso do switch
-            nivel = 1
-        }else if (imc<=18.4) {
-            nivel = 2
-        }else if (imc<=24.9) {
-            nivel = 3
-        }else if (imc<=29.9) {
-            nivel = 4
-        }else if (imc<=34.9) {
-            nivel = 5
-        }else if (imc<=40) {
-            nivel = 6
-        }else if (imc>=40.1) {
-            nivel = 7
-        }else{
-            nivel = 0
+        if (imc>=0 && imc<=16.9) {//seleção de nivel para uso do switch
+                nivel = 1
+            }else if (imc<=18.4) {
+                nivel = 2
+            }else if (imc<=24.9) {
+                nivel = 3
+            }else if (imc<=29.9) {
+                nivel = 4
+            }else if (imc<=34.9) {
+                nivel = 5
+            }else if (imc<=40) {
+                nivel = 6
+            }else if (imc>=40.1) {
+                nivel = 7
+            }else{
+                nivel = 0
         }
 
         switch (nivel) {//resposta com calculo de acordo com valores fornecidos
@@ -72,12 +105,12 @@
         case 1:
             document.querySelector('p#resp').innerHTML='';
                 document.querySelector('p#resp').innerHTML+=(` Seu IMC é ${imc}, você esta muito abaixo do peso !`)
-                document.querySelector('p#resp').innerHTML+=(` O peso ideal máximo para sua altura é ${ideal} Kg`)
+                document.querySelector('p#resp').innerHTML+=(` O peso ideal para sua altura é aproximadamente${ideal} Kg`)
                 break;
         case 2:
             document.querySelector('p#resp').innerHTML='';
             document.querySelector('p#resp').innerHTML+=(`Seu IMC é ${imc}, você esta abaixo do peso !`)
-            document.querySelector('p#resp').innerHTML+=(` O peso ideal máximo para sua altura é ${ideal} Kg`)
+            document.querySelector('p#resp').innerHTML+=(` O peso ideal para sua altura é aproximadamente ${ideal} Kg`)
             break;
 
         case 3:
@@ -112,9 +145,9 @@
         
             default:
                 break;
-        }   
-    }
-</script>
-     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
+            }   
+        }
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
 </body>
 </html>
